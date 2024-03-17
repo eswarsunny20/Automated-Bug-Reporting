@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 import StepDefinitions.SetupClass;
 import io.cucumber.java.Scenario;
 
+import org.openqa.selenium.interactions.Actions;
+
 public class BasePage {
 	protected WebDriver driver;
 
@@ -77,7 +79,9 @@ public class BasePage {
 	public boolean compareText(String locator, String textToCompare) {
 
 		String actualText = driver.findElement(getBy(locator)).getAttribute("textContent");
+
 		Assert.assertEquals("Comparing Text", actualText, textToCompare);
+
 		if (actualText.equals(textToCompare)) {
 			return true;
 		} else {
@@ -106,14 +110,24 @@ public class BasePage {
 		Assert.assertEquals(verifyElementPresent(locator), true);
 
 	}
-
 	public void switchToIframe() {
-		driver.switchTo().frame(0);
-	}
+        driver.switchTo().frame(0); // Assuming the iframe is the first one on the page
+    }
+ 
+    public void backToNormal() {
+        driver.switchTo().defaultContent();
+    }
+	 public static void hoverOverElement(WebDriver driver, String elementXPath) {
+	        Actions actions = new Actions(driver);
+	        WebElement element = driver.findElement(By.xpath(elementXPath));
+	        actions.moveToElement(element).perform();
+	    }
+	    public void selectlistElement( String visibleText) {
+	   	 String optionXPath = String.format("//ul[@class='sub-menu']//a[text()='%s']", visibleText);
+	        driver.findElement(By.xpath(optionXPath)).click();
+	    }
 
-	public void backToNormal() {
-		driver.switchTo().defaultContent();
-	}
+	
 
 	public void elementHighlighter(String locator) {
 		try {

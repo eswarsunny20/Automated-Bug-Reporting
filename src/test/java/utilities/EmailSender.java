@@ -17,6 +17,7 @@ public class EmailSender {
 
 		String to = "";
 
+
 		String from = "casuallysunny12@gmail.com";
 
 		Properties properties = System.getProperties();
@@ -28,6 +29,7 @@ public class EmailSender {
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication("casuallysunny12@gmail.com", "Password Here");
+
 			}
 		});
 //	      session.setDebug(true);
