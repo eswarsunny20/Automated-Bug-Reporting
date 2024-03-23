@@ -12,13 +12,18 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailSender {
+	
+	static String projectPath = System.getProperty("user.dir");
+	static String propertyFile = projectPath + "/project.properties";
+    static TestUtils utils = new TestUtils(propertyFile);
+    
+    
 	public static void Email() {
-		String projectPath = System.getProperty("user.dir");
+		
+		String to = utils.getProperty("ToEmail");
 
-		String to = "";
 
-
-		String from = "casuallysunny12@gmail.com";
+		String from = utils.getProperty("FromEmail");
 
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -79,6 +84,11 @@ public class EmailSender {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static String getEmailStatus() {
+		String property = utils.getProperty("EmailFlag");
+		return property;
 	}
 
 }

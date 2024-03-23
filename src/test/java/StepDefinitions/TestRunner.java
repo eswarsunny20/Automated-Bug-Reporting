@@ -41,7 +41,9 @@ public class TestRunner {
 			}
 			System.err.println("System has raised "+ count +" bug/bugs");
 		}
-		EmailSender.Email();
+		if(EmailSender.getEmailStatus().equals("true")) {
+			EmailSender.Email();
+		}
 	}    
     
 }
