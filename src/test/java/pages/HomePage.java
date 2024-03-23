@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import utilities.BasePage;
 import utilities.Constants;
 import utilities.TestUtils;
+import static io.restassured.RestAssured.given;
 
 public class HomePage {
 
@@ -54,7 +55,7 @@ public class HomePage {
 		boolean verifyElementPresent = basePage.verifyElementPresent(Constants.NAME_TEXT_FIELD);
 		System.out.println(verifyElementPresent);
 		System.out.println("hits enter");
-		Assert.assertEquals("Pass","Fail","Comparing Text");
+		Assert.assertEquals("Comparing Text","Pass","Fail");
 	}
 
 	@Then("End of the test")
@@ -62,4 +63,23 @@ public class HomePage {
 		System.out.println("End of the test");
 		
 	}
+	
+	@And("validate api")
+    public void sample() {
+       
+        String username = utils.getProperty("Username");
+        String password = utils.getProperty("Password");
+        String baseUri = utils.getProperty("BaseURI");
+        String credentials = org.apache.commons.codec.binary.Base64.encodeBase64String((username + ":" + password).getBytes());
+
+        given()
+            .baseUri(baseUri)
+            .header("Authorization", "Basic " + credentials)
+            .header("Accept", "application/json")
+        .when()
+            .get("issue/KAN-1")
+        .then()
+            .log().all()
+            .assertThat().statusCode(200);
+    }
 }
