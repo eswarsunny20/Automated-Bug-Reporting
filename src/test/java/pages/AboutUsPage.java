@@ -32,11 +32,6 @@ public class AboutUsPage {
         this.driver = SetupClass.getDriver();
         this.basePage = SetupClass.getBasePage();
     }
-//    @Given("browser is open")
-//	public void browser_is_open() {
-//		System.out.println("browser is open");
-//	
-//	}
 
 	@When("User is on Home page")
 	public void user_is_on_home_page() {
@@ -64,12 +59,6 @@ public class AboutUsPage {
 		}
 	}
 
-//	@Then("End of the test")
-//	public void user_is_navigated() {
-//		System.out.println("user is navigated to About Us page");
-//		driver.close();
-//		driver.quit();
-//	}
 
 @And("user is at the bottom of the page")
 public void user_is_at_bottom_of_page() {

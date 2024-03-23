@@ -103,6 +103,7 @@ public class SetupClass {
 	public void tearDown() throws InterruptedException {
 		if (driver != null) {
 			System.out.println("Closing the browser");
+			driver.close();
 			driver.quit();
 			setup.afterHooks();
 		}
