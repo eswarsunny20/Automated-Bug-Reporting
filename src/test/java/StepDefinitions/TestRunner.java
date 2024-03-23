@@ -41,7 +41,7 @@ public class TestRunner {
 			}
 			System.err.println("System has raised "+ count +" bug/bugs");
 		}
-//		EmailSender.Email();
+		EmailSender.Email();
 	}    
     
 }
