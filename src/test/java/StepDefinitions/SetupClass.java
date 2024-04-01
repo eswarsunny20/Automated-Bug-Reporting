@@ -7,6 +7,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
@@ -39,7 +40,15 @@ public class SetupClass {
 		System.out.println("Setting up the browser");
 		System.setProperty(utils.getProperty("Chrome"),  utils.selectFromChain("SelectedVersion"));
 
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("--no-sandbox"); // Bypass OS security model
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		basePage = new BasePage(driver);
