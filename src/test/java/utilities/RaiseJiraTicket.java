@@ -24,7 +24,7 @@ public class RaiseJiraTicket {
         	String os = System.getProperty("os.name");
             String baseUri = utils.getProperty("BaseURI");
             String username = utils.getProperty("Username");
-            String password = utils.getProperty("Password");
+            String password = utils.getJiraToken();
             String credentials = org.apache.commons.codec.binary.Base64.encodeBase64String((username + ":" + password).getBytes());
 
             // Make the POST request

@@ -68,7 +68,7 @@ public class HomePage {
     public void sample() {
        
         String username = utils.getProperty("Username");
-        String password = utils.getProperty("Password");
+        String password = utils.getJiraToken();
         String baseUri = utils.getProperty("BaseURI");
         String credentials = org.apache.commons.codec.binary.Base64.encodeBase64String((username + ":" + password).getBytes());
 

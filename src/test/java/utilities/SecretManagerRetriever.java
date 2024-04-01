@@ -36,7 +36,7 @@ public class SecretManagerRetriever {
             }
         }
 
-        System.out.println("Retrieved secret value for field '" + field + "': " + secretValue);
+//        System.out.println("Retrieved secret value for field '" + field + "': " + secretValue);
         return secretValue;
 
     }
