@@ -62,4 +62,5 @@ public class SecretManagerRetriever {
         return retrieveSecret("prod/emailandjira/tokens", "JiraToken");
     }
     
+    
 }
