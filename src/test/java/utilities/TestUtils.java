@@ -3,6 +3,7 @@ package utilities;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.Properties;
 
 public class TestUtils {
@@ -38,5 +39,42 @@ public class TestUtils {
 		return driverPath;
     }
     
+    public String getEmailPassword() {
+        String runEnvGiven = properties.getProperty("RunEnvironment");
+        if (runEnvGiven.equalsIgnoreCase("Local")) {
+            try {
+                // Dynamically load the class
+                Class<?> localRetrieverClass = Class.forName("utilities.SecretManagerRetrieverLocal");
+                // Get the getEmailPassword() method
+                Method method = localRetrieverClass.getMethod("getEmailPassword");
+                // Invoke the method on an instance (null for static methods)
+                return (String) method.invoke(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            return SecretManagerRetriever.getEmailPassword();
+        }
+    }
+    
+    public String getJiraToken() {
+    	String runEnvGiven = properties.getProperty("RunEnvironment");
+    	if (runEnvGiven.equalsIgnoreCase("Local")) {
+            try {
+                // Dynamically load the class
+                Class<?> localRetrieverClass = Class.forName("utilities.SecretManagerRetrieverLocal");
+                // Get the getJiraToken() method
+                Method method = localRetrieverClass.getMethod("getJiraToken");
+                // Invoke the method on an instance (null for static methods)
+                return (String) method.invoke(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            return SecretManagerRetriever.getJiraToken();
+        }
+    }
     
 }

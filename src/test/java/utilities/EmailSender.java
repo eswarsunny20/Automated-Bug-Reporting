@@ -20,10 +20,10 @@ public class EmailSender {
     
 	public static void Email() {
 		
-		String to = utils.getProperty("ToEmail");
+		String toEmail = utils.getProperty("ToEmail");
 
 
-		String from = utils.getProperty("FromEmail");
+		String fromEmail = utils.getProperty("FromEmail");
 
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -33,15 +33,15 @@ public class EmailSender {
 
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("casuallysunny12@gmail.com", "Password Here");
+				return new PasswordAuthentication(fromEmail, utils.getEmailPassword());
 
 			}
 		});
 //	      session.setDebug(true);
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setFrom(new InternetAddress(fromEmail));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 			message.setSubject("Hashers Test Report!");
 			Multipart multipart = new MimeMultipart();
 			// HTML part
