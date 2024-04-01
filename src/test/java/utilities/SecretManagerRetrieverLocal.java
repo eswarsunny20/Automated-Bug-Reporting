@@ -16,8 +16,8 @@ public class SecretManagerRetrieverLocal {
 
     public static String retrieveSecret(String secretName, String field) {
         String region = "ca-central-1";
-        String accessKeyId = "AKIA4MTWHDKRSYUO7WV3";
-        String secretAccessKey = "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";
+        String accessKeyId = "";
+        String secretAccessKey = "";
 
         AWSSecretsManager client = AWSSecretsManagerClientBuilder.standard()
                                     .withRegion(region)
@@ -71,6 +71,7 @@ public class SecretManagerRetrieverLocal {
     public static String getJiraToken() {
         return retrieveSecret("prod/emailandjira/tokens", "JiraToken");
     }
+    
     
 }
 
