@@ -58,7 +58,7 @@ public class RaiseJiraTicket {
 		try {
 	        String baseUri = utils.getProperty("BaseURI");
 	        String username = utils.getProperty("Username");
-	        String password = utils.getProperty("Password");
+	        String password = utils.getJiraToken();
 	        
 	        String endpoint = "/rest/api/3/issue/" + issueKey + "/attachments";
 	        System.out.println("End point"+endpoint);
