@@ -38,19 +38,26 @@ public class SetupClass {
 		TestUtils utils = new TestUtils(propertyFile);
 
 		System.out.println("Setting up the browser");
-		System.setProperty(utils.getProperty("Chrome"),  utils.selectFromChain("SelectedVersion"));
-
-		ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-        options.addArguments("--no-sandbox"); // Bypass OS security model
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+		if(utils.getProperty("SelectedVersion").equalsIgnoreCase("linux")) {
+			
+			System.setProperty(utils.getProperty("Chrome"),  utils.selectFromChain("SelectedVersion"));
+			ChromeOptions options = new ChromeOptions();
+	        options.addArguments("--headless");
+	        driver = new ChromeDriver(options);
+	        options.addArguments("start-maximized"); // open Browser in maximised mode
+	        options.addArguments("disable-infobars"); // disabling info-bars
+	        options.addArguments("--disable-extensions"); // disabling extensions
+	        options.addArguments("--disable-gpu"); // applicable to windows os only
+	        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+	        options.addArguments("--no-sandbox"); // Bypass OS security model
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			
+		}else {
+			System.setProperty(utils.getProperty("Chrome"), projectPath + utils.selectFromChain("SelectedVersion"));
+	
+			driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		}
 		basePage = new BasePage(driver);
 		setup.beforeHooks(scenario);
 		scenarioName = scenario.getName();
