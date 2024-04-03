@@ -82,6 +82,11 @@ public class BasePage {
 
 		Assert.assertEquals("Comparing Text", actualText, textToCompare);
 
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		
+		js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');",
+				 driver.findElement(getBy(locator)));
+
 		if (actualText.equals(textToCompare)) {
 			return true;
 		} else {
