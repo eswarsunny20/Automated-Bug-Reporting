@@ -55,11 +55,11 @@ public class SecretManagerRetriever {
     
     
     public static String getEmailPassword() {
-        return retrieveSecret("prod/emailandjira/tokens", "EmailPassword");
+        return retrieveSecret("prod/hashers/keys", "emailPassword");
     }
-
+ 
     public static String getJiraToken() {
-        return retrieveSecret("prod/emailandjira/tokens", "JiraToken");
+        return retrieveSecret("prod/hashers/keys", "jiraToken");
     }
     
     
